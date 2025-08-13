@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645904198760",
+    "project_id": "tam-luy",
+    "storage_bucket": "tam-luy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645904198760:android:68ed9c551f2ceb43c51fdd",
+        "android_client_info": {
+          "package_name": "com.salait.tamluy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7m7bdbba9oOQCRs2ZTkr-vNEdKJNtTQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
