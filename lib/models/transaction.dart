@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TransactionFirestore {
-  final String id;
+  final String? id;
   final String? title;
   final num? amount;
   final String? category;
@@ -12,7 +12,7 @@ class TransactionFirestore {
   String? userId;
 
   TransactionFirestore(
-      {required this.id,
+      {this.id,
       this.title,
       this.amount,
       this.type,
@@ -31,6 +31,7 @@ class TransactionFirestore {
       'currency': currency,
       'date': date,
       'type': type.toString().split('.').last,
+      'userId': userId,
     };
   }
 

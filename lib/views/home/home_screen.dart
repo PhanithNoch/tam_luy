@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
       title: "Delete Transaction",
       middleText: "Are you sure you want to delete this transaction?",
       onConfirm: () {
-        _controller.deleteTransaction(transaction.id);
+        _controller.deleteTransaction(transaction.id!);
         Get.back();
       },
       onCancel: () {

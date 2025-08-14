@@ -18,6 +18,7 @@ class TransactionController extends GetxController {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final Rx<TransactionType> selectedType = TransactionType.expense.obs;
+
   final RxString selectedCategory = ''.obs;
   final Rx<DateTime> selectedDate = DateTime.now().obs;
   final Rx<Currency> selectedCurrency = Currency.supportedCurrencies.first.obs;
@@ -83,6 +84,8 @@ class TransactionController extends GetxController {
       }
       transaction.userId = user.uid;
       await firestore.collection('transactions').add(transaction.toMap());
+      // Clear input fields after adding
+      Get.back();
       fetchTransactions(); // Refresh the list after adding
     } catch (e) {
       errorMessage.value = e.toString();
