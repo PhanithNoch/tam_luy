@@ -62,6 +62,8 @@ class RegisterView extends StatelessWidget {
                                 final name = nameController.text;
                                 final email = emailController.text;
                                 final password = passwordController.text;
+
+                                _controller.signUp(email, password);
                               },
                               child: Text("Regiser"),
                             ),

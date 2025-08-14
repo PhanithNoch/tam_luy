@@ -6,8 +6,8 @@ import 'package:tam_luy/views/register_view.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: "admin@gmail.com");
+  final passwordController = TextEditingController(text: "admin@gmail.com");
   final _controller = Get.put(LoginController());
 
   @override
@@ -62,7 +62,19 @@ class LoginScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                final email = emailController.text.trim();
+                                final password = passwordController.text.trim();
+                                if (email.isEmpty || password.isEmpty) {
+                                  Get.snackbar(
+                                    'Error',
+                                    'Email and password cannot be empty',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                  );
+                                  return;
+                                }
+                                _controller.signIn(email, password);
+                              },
                               child: Text("Login"),
                             ),
                           )
