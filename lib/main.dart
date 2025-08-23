@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tam_luy/views/home/home_screen.dart';
 import 'package:tam_luy/views/login_screen.dart';
 
+import 'controllers/auth_controller.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -10,6 +12,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 
@@ -20,12 +23,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: LoginScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: GetBuilder<AuthController>(builder: (logic) {
+          if (logic.currentUser != null) {
+            return HomeScreen();
+          } else {
+            return LoginScreen();
+          }
+        }));
   }
 }

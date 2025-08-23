@@ -7,4 +7,9 @@
     fields: 
     title, amount, type(income,expense), date,description,userId,currency
 
+
+Next Step: 
+ 1. Add transaction to FireStore
+    2. Fetch transaction from Firestore 
+
     

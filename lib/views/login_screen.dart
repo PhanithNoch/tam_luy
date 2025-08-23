@@ -6,8 +6,8 @@ import 'package:tam_luy/views/register_view.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: "user@gmail.com");
+  final passwordController = TextEditingController(text: "user@gmail.com");
   final _controller = Get.put(LoginController());
 
   @override
@@ -54,20 +54,34 @@ class LoginScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           hintText: "Password",
                         ),
+                        obscureText: true,
                       ),
                       SizedBox(
                         height: 16,
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text("Login"),
-                            ),
-                          )
-                        ],
-                      ),
+                      Obx(() {
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: _controller.isLoading.value
+                                    ? null
+                                    : () {
+                                        final email = emailController.text;
+                                        final pass = passwordController.text;
+                                        _controller.signIn(
+                                            email: email, password: pass);
+                                      },
+                                child: _controller.isLoading.value
+                                    ? Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : Text("Login"),
+                              ),
+                            )
+                          ],
+                        );
+                      }),
                     ],
                   ),
                 ),
