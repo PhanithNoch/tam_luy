@@ -74,6 +74,19 @@ class TransactionController extends GetxController {
 
       await _firestore.collection(_collectionName).add(transaction);
       Get.snackbar("Success", "Add transaction Success");
+
+      Get.defaultDialog(
+          title: "Success",
+          content: Text('Transaction Added'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back(); // close dialog
+                Get.back(result: true);
+              },
+              child: Text("Ok"),
+            )
+          ]);
     } on FirebaseAuthException catch (e) {
       Get.defaultDialog(
         title: "Error",

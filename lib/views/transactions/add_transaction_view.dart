@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tam_luy/controllers/transactions/transaction_controller.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,9 @@ class AddTransactionView extends StatelessWidget {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   final _descriptionController = TextEditingController();
-  final _dateTimeController = TextEditingController();
+  final _dateTimeController = TextEditingController(
+    text: DateTime.timestamp().toString(),
+  );
   final _controller = Get.put(TransactionController());
 
   @override
@@ -22,7 +25,7 @@ class AddTransactionView extends StatelessWidget {
           children: [
             // expense or income
             DropdownButtonFormField(
-              // value: _controller.selectedType.value,
+              value: _controller.selectedType.value,
               items: _controller.lstTypes.value.isEmpty
                   ? null
                   : _controller.lstTypes.value
@@ -45,6 +48,7 @@ class AddTransactionView extends StatelessWidget {
             ),
             TextFormField(
               controller: _amountController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: "Amount",
               ),
@@ -57,6 +61,7 @@ class AddTransactionView extends StatelessWidget {
             ),
             TextFormField(
               controller: _dateTimeController,
+              keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 hintText: "Date Time",
               ),
@@ -120,6 +125,8 @@ class AddTransactionView extends StatelessWidget {
                       category: category,
                       date: DateTime.timestamp(),
                     );
+                    _titleController.clear();
+                    _amountController.clear();
                   },
                   child: Text(
                     "Add Transaction",
