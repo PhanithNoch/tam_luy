@@ -7,6 +7,7 @@ class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Rx<User?> user = Rx<User?>(null);
 
+  @override
   onInit() {
     super.onInit();
     user.bindStream(_auth.authStateChanges());
@@ -14,7 +15,7 @@ class LoginController extends GetxController {
       if (user != null) {
         print("User is signed in: ${user.email}");
         print("User ID: ${user.uid}");
-        Get.to(() => HomeScreen());
+        // Get.to(() => HomeScreen());
       }
     });
   }

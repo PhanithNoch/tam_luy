@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tam_luy/views/login_screen.dart';
+import 'package:tam_luy/controllers/login_controller.dart';
+import 'package:tam_luy/views/main_wrapper.dart';
 
 import 'firebase_options.dart';
 
@@ -10,6 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Get.put(LoginController());
   runApp(const MyApp());
 }
 
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LoginScreen(),
+      home: MainWrapper(),
     );
   }
 }

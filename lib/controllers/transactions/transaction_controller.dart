@@ -12,6 +12,30 @@ class TransactionController extends GetxController {
   RxBool isLoading = true.obs;
   RxString errorMessage = ''.obs;
   final _authController = Get.find<LoginController>();
+  final RxBool _isLoading = false.obs;
+  final RxString _error = ''.obs;
+
+  // Computed values
+  final RxDouble _totalIncome = 0.0.obs;
+  final RxDouble _totalExpense = 0.0.obs;
+  final RxDouble _balance = 0.0.obs;
+
+  void _calculateTotals() {
+    double income = 0.0;
+    double expense = 0.0;
+
+    for (var transaction in transactions) {
+      if (transaction.type == TransactionType.income) {
+        income += transaction.amount ?? 0.0;
+      } else {
+        expense += transaction.amount ?? 0.0;
+      }
+    }
+
+    _totalIncome.value = income;
+    _totalExpense.value = expense;
+    _balance.value = income - expense;
+  }
 
   // Categories for income and expenses
   final TextEditingController titleController = TextEditingController();
@@ -68,6 +92,7 @@ class TransactionController extends GetxController {
       transactions.value = snapshot.docs
           .map((doc) => TransactionFirestore.fromMap(doc.data(), doc.id))
           .toList();
+      _calculateTotals();
     } catch (e) {
       errorMessage.value = e.toString();
     } finally {
