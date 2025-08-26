@@ -23,7 +23,7 @@ class _MainWrapperState extends State<MainWrapper> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.stacked_bar_chart), label: "Stats"),
