@@ -12,4 +12,19 @@ Next Step:
  1. Add transaction to FireStore
     2. Fetch transaction from Firestore 
 
+
+Next Step: 
+ 1. Add transaction to FireStore
+    2. Fetch transaction from Firestore 
+
+
+
+Build flutter app release production 
+
+1. flutter build apk 
+2. flutter build apk --release (app size)
+3. flutter build appbundle --release (release to playstore)
+
+Notes: 
+
     

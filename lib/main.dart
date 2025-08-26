@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tam_luy/controllers/login_controller.dart';
+import 'package:tam_luy/themes/app_theme.dart';
+import 'package:tam_luy/themes/theme_service.dart';
 import 'package:tam_luy/views/home/home_screen.dart';
 import 'package:tam_luy/views/login_screen.dart';
 
@@ -12,12 +15,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Get.put(AuthController());
-  runApp(const MyApp());
+  Get.put(LoginController());
+  runApp(MyApp());
+  // Get.put(AuthController());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final _themeService = Get.put(ThemeService(), permanent: true);
 
   // This widget is the root of your application.
   @override
@@ -25,10 +31,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: _themeService.getTheme(),
         home: GetBuilder<AuthController>(builder: (logic) {
           if (logic.currentUser != null) {
             return HomeScreen();
